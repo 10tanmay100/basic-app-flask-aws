@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Numbers</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .message {
+            color: green;
+            font-size: 1.2em;
+            margin-top: 20px;
+        }
+        .error {
+            color: red;
+            font-size: 1.2em;
+            margin-top: 20px;
+        }
+    </style>
+    <!-- Include the confetti library -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+</head>
+<body>
+    <h1>Add Two Numbers</h1>
+    <form method="POST" action="/add">
+        <label for="num1">Number 1:</label>
+        <input type="number" name="num1" id="num1" step="any" required>
+        <br><br>
+        <label for="num2">Number 2:</label>
+        <input type="number" name="num2" id="num2" step="any" required>
+        <br><br>
+        <button type="submit">Add</button>
+    </form>
+    
+    {% if result is not none %}
+        <h2>Result: {{ result }}</h2>
+        <p class="message">{{ success_message }}</p>
+        <script>
+            // Trigger confetti effect when success message is displayed
+            confetti({
+                particleCount: 100,
+                spread: 70,
+                origin: { y: 0.6 }
+            });
+        </script>
+    {% elif error_message %}
+        <p class="error">{{ error_message }}</p>
+    {% endif %}
+</body>
+</html>
